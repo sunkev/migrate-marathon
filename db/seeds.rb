@@ -10,17 +10,17 @@ list_of_books = [
   {
     title: "The Orphan Master's Son: A Novel",
     author: "Adam Johnson",
-    rating: '4',
+    rating: '4'
   },
   {
     title: 'The Round House',
     author: "Louise Erdrich",
-    rating: '4.5',
+    rating: '4.5'
   },
   {
     title: 'Behind the Beautiful Forevers: Life, death, and hope in a Mumbai undercity',
     author: 'Katherine Boo',
-    rating: '4',
+    rating: '4'
   }
 ]
 
@@ -38,4 +38,29 @@ list_of_books.each do |attributes|
   end
 
   book.save!
+end
+
+list_of_categories = [
+  {
+    theme: "Action"
+  },
+  {
+    theme: 'Adventure'
+  },
+  {
+    theme: "Romance"
+  }
+]
+
+list_of_books.each do |attributes|
+  category = Category.where({
+    theme: attributes[:theme],
+    }).first
+
+  if category.nil?
+    category = Category.new(attributes)
+  else
+    category.attributes = attributes
+  end
+  category.save!
 end
