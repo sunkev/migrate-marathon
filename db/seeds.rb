@@ -52,9 +52,9 @@ list_of_categories = [
   }
 ]
 
-list_of_books.each do |attributes|
+list_of_categories.each do |attributes|
   category = Category.where({
-    theme: attributes[:theme],
+    theme: attributes[:theme]
     }).first
 
   if category.nil?
@@ -62,5 +62,6 @@ list_of_books.each do |attributes|
   else
     category.attributes = attributes
   end
+
   category.save!
 end
